@@ -1,6 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
+metadata: 
   name: frontend
   namespace: banking
 
@@ -19,8 +19,6 @@ spec:
       containers:
         - name: frontend
           image: souravsingh278/java-fintech-frontend:1.0
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
-
-            
-         
