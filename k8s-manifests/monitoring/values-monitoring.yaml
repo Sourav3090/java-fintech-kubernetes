@@ -20,7 +20,7 @@ prometheus:
         memory: 1Gi
 
 grafana:
-  nodeselector:
+  nodeSelector:
     kubernetes.io/hostname: monitoring-node
   persistence:
     enabled: true
@@ -55,7 +55,8 @@ additionalPrometheusRulesMap:
             for: 30s
             labels:
               severity: warning
-            annotation:
+            annotations:
+              summary: "Pod is CrashLooping"
               description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} is in CrashLoopBackOff"
 
           - alert: kubePodOOMKilled
@@ -63,5 +64,6 @@ additionalPrometheusRulesMap:
             for: 10s
             labels:
               severity: critical
-            annotation:
+            annotations:
+              summary: "Container was OOMKilled"
               description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} container {{ $labels.container }} was OOMKilled"
