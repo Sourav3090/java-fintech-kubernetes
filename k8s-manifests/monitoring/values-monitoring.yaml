@@ -1,0 +1,46 @@
+prometheus:
+  prometheusspec:
+    retention:
+    nodeSelector:
+      role: monitoring
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: local-path
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 20Gi
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+      limits:
+        cpu: 500m
+        memory: 1Gi
+
+grafana:
+  nodeSelector:
+    role: monitoring
+  persistence:
+    enabled: true
+    storageClassName: local-path
+    size: 5Gi
+  adminpassword: "StrongPassword123!"
+  service:
+    type: NodePort
+    nodePort: 30090
+
+alertmanager:
+  alertmanagerspec:
+    nodeSelector:
+      role: monitoring
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: local-path
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 2Gi
+
