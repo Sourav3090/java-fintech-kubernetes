@@ -54,7 +54,8 @@ alertmanager:
       receiver: 'discord-notifications'
       group_by: ['alertname']
       group_wait: 30s
-      group_interval: 4h
+      group_interval: 5m
+      repeat_interval: 4h
       route:
        - receiver: 'null'
          matchers:
@@ -64,7 +65,7 @@ alertmanager:
       - name: 'discord-notifications'
         discord_configs:
           -webhook_url: https://discord.com/api/webhooks/1533798402716864625/b2vXnkzqEeAOQhYRCzjIgutvI2mgleKBYCGEbNWtqapFLJPn6C772vfMU806TyDljVHB
-          
+
          
 
             
